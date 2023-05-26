@@ -1,0 +1,1 @@
+This directory contains the Linux binary distro of MH. The Docker image will be created using this distro.

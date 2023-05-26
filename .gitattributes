@@ -1,0 +1,16 @@
+# UNIX line ending for shell scripts and config files
+*.sh text eol=lf
+*.cnf text eol=lf
+
+# binary data
+*.p12 binary
+*.jks binary
+*.xdb binary
+*.der binary
+
+*.gz binary
+*.jar binary
+*.zip binary
+*.7z binary
+
+*.pdf binary

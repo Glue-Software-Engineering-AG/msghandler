@@ -1,0 +1,49 @@
+version: '2.4'
+services:
+
+# The directories mounted here, in order to start the MH container, match the configuration in
+# `host-folders/conf/config.xml` and the related directory structure under `host-folders`
+
+  messagehandler:
+    image: msghandler:0.0.1-3.4.1
+    container_name: messagehandler
+    #restart: unless-stopped
+    user: 10003:20002
+    volumes:
+      # https://github.com/gliderlabs/docker-alpine/issues/136
+      - /etc/localtime:/etc/localtime:ro
+      # Mount the MH root directory
+      - ./host-folders/mh:/app/msghandler
+      # Mount the configuration files
+      - ./host-folders/conf/config.xml:/opt/msghandler/current/conf/config.xml:ro
+      - ./host-folders/conf/signing/signature.properties:/opt/msghandler/current/conf/signing/signature.properties:ro
+      - ./host-folders/conf/signing/demo-certificate.p12:/opt/msghandler/current/conf/signing/demo-certificate.p12:ro
+      # Mount the log directory
+      - ./host-folders/log:/opt/msghandler/current/log
+      # Mount the sedex interface directory
+      - ./host-folders/sedex/interface:/app/sedex
+      # Mount the directories used for the native application. The directories are referenced in
+      # `host-folders/conf/config.xml`
+      - ./host-folders/mh/eschkg/outbox:/app/application/eschkg/outbox
+      - ./host-folders/mh/eschkg/inbox:/app/application/eschkg/inbox
+      - ./host-folders/mh/eschkg/signing-outbox:/app/application/eschkg/signing-outbox
+      # Mount the directories used for the transparent application. The directories are referenced in
+      # `host-folders/conf/config.xml`
+      - ./host-folders/mh/ech-0112/outbox:/app/application/ech-0112/outbox
+      - ./host-folders/mh/ech-0112/inbox:/app/application/ech-0112/inbox
+      - ./host-folders/mh/ech-0112/receipts:/app/application/ech-0112/receipts
+    stop_signal: SIGTERM
+    ports:
+      - 18080:18080
+    networks:
+      internal:
+        aliases:
+          - msghandler.docker
+
+networks:
+  internal:
+    name: internal
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.24.0.0/16

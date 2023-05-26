@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://msghandler.suis.admin.ch/xmlns/config"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.1"
+        xsi:schemaLocation="http://msghandler.suis.admin.ch/xmlns/config  config.xsd">
+
+  <!-- Location of the sedex interface directories. They reside on the Docker host. We assume, that they will be mounted
+   in the container under /app/sedex/* -->
+  <sedexAdapter>
+    <participantId>7-99999-1</participantId>
+    <inboxDir>/app/sedex/inbox</inboxDir>
+    <outboxDir>/app/sedex/outbox</outboxDir>
+    <receiptDir>/app/sedex/receipts</receiptDir>
+    <sentDir>/app/sedex/processed</sentDir>
+  </sedexAdapter>
+
+  <!-- Location of the MessageHandler working directories. They reside on the Docker host. We assume, that they will
+  be mounted in the container under /app/msghandler/* -->
+  <messageHandler>
+    <workingDir dirPath="/app/msghandler/working"/>
+    <baseDir dirPath="/app/msghandler"/>
+    <sedexInboxDirCheck cron="0/15 * * * * ?"/>
+    <sedexReceiptDirCheck cron="0/15 * * * * ?"/>
+    <defaultOutboxCheck cron="0/15 * * * * ?"/>
+    <webserviceInterface host="localhost" port="18080"/>
+    <statusDatabase dataHoldTimeInDays="2" resend="true" dirPath="/app/msghandler/working/db"/>
+    <protocol createPerMessageProtocols="false"/>
+  </messageHandler>
+
+  <!-- Example configuration of an eSchKG/e-LP application. The directories to which this application write to and
+  reads from reside on the Docker host. We assume, that the directories will be mounted in the container under
+  /app/application/eschkg/* -->
+  <nativeApp participantId="7-99999-2" >
+    <outbox dirPath="/app/application/eschkg/outbox" msgType="10301">
+      <!-- Note: unless you want to have your own recipientIdResolver, you should use the one provided in the
+      installation package. This recipientIdResolver resided inside of the Docker container. -->
+      <recipientIdResolver filePath="/opt/msghandler/current/conf/recipientIdResolver.groovy" method="resolve"/>
+      <!-- Note: The signingOutbox it intended for collection offices only. Each office has its own signing
+      certificate and probably its own signature properties, which will reside on the Docker host. -->
+      <signingOutbox dirPath="/app/application/eschkg/signing-outbox"
+                     signingProfilePath="/opt/msghandler/current/conf/signing/signature.properties">
+        <certificate filePath="/opt/msghandler/current/conf/signing/demo-certificate.p12" password="123456"/>
+      </signingOutbox>
+    </outbox>
+    <inbox dirPath="/app/application/eschkg/inbox" msgTypes="10301"/>
+  </nativeApp>
+
+  <!-- Example configuration of an transparent application ("normal" sedex application). The directories to which this
+  application write to and reads from reside on the Docker host. We assume, that the directories will be mounted in
+  the container under /app/application/ech-0112/* -->
+  <transparentApp participantId="7-99999-3" >
+    <outbox   dirPath="/app/application/ech-0112/outbox"/>
+    <inbox    dirPath="/app/application/ech-0112/inbox"    msgTypes="112"/>
+    <receipts dirPath="/app/application/ech-0112/receipts" msgTypes="112"/>
+  </transparentApp>
+
+</config>
