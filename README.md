@@ -10,12 +10,12 @@ This Docker image should be used in conjunction with the
 ## Usage
 
 The docker images are available on 
-[Glue Software Engineering AG - MessageHandler Images](https://hub.docker.com/repository/docker/gluech/msghandler/)
+[Glue Software Engineering AG - MessageHandler Images](https://hub.docker.com/r/gluech/msghandler)
 
 To use the MessageHandler images from Docker hub, run
 
 ```
-docker pull gluech/msghandler:1.0.0
+docker pull gluech/msghandler:mh-1.0.0
 ```
 
 ## How to test drive MH?
