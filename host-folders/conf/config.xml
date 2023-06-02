@@ -21,7 +21,7 @@
     <sedexInboxDirCheck cron="0/15 * * * * ?"/>
     <sedexReceiptDirCheck cron="0/15 * * * * ?"/>
     <defaultOutboxCheck cron="0/15 * * * * ?"/>
-    <webserviceInterface host="localhost" port="18080"/>
+    <webserviceInterface host="0.0.0.0" port="18080"/>
     <statusDatabase dataHoldTimeInDays="2" resend="true" dirPath="/app/msghandler/working/db"/>
     <protocol createPerMessageProtocols="false"/>
   </messageHandler>
