@@ -9,7 +9,7 @@ This Docker image should be used in conjunction with the
 
 ## Build the image for development
 
-To build the Docker imagage locally for development
+To build the Docker image locally for development
 
 docker build . --file Dockerfile --tag gluech/msghandler:dev
 
