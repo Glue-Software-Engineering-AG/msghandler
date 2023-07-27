@@ -1,4 +1,4 @@
-FROM amazoncorretto:8-alpine
+FROM amazoncorretto:8u382-alpine3.18-jre
 
 MAINTAINER Glue Software Engineering AG <support@fenceit.ch>
 
@@ -36,6 +36,17 @@ RUN \
     find . -type f -exec chmod 0644 {} \; && \
     # all dirs: (755) rwx rx rx \
     find . -type d -exec chmod 0755 {} \; && \
+    # Create all neded dirs under /app/msghandler (see Glue-Software-Engineering-AG/msghandler-docker#5) \
+    mkdir -p \
+      /working/tmp/receiving \
+      /working/tmp/preparing \
+      /working/tmp \
+      /working/unknown \
+      /working/corrupted \
+      /working/db \
+      /working/sent \
+      /app/msghandler/inbox \
+      /app/msghandler/outbox \; && \
     # the following files must be executable\
     chmod 0755 /opt/msghandler/current/bin/message-handler \
              /opt/msghandler/current/bin/wrapper \

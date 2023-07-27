@@ -5,7 +5,7 @@ services:
 # `host-folders/conf/config.xml` and the related directory structure under `host-folders`
 
   messagehandler:
-    image: gluech/msghandler:mh-1.0.0
+    image: gluech/msghandler:mh-1.0.1
     container_name: messagehandler
     #restart: unless-stopped
     user: 10003:20002
