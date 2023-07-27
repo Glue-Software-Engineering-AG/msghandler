@@ -7,6 +7,12 @@ regarding Open eGov MessageHandler consult the
 This Docker image should be used in conjunction with the
 [offical sedex Docker image](https://hub.docker.com/r/sedexch/sedex-client).
 
+## Build the image for development
+
+To build the Docker image locally for development
+
+docker build . --file Dockerfile --tag gluech/msghandler:dev
+
 ## Usage
 
 The docker images are available on 
@@ -15,7 +21,7 @@ The docker images are available on
 To use the MessageHandler images from Docker hub, run
 
 ```
-docker pull gluech/msghandler:1.0.0
+docker pull gluech/mh:1.0.1
 ```
 
 ## How to test drive MH?
@@ -47,6 +53,7 @@ deployments.
 
 | Tag      | Description                                                  | Release date |
 |----------|--------------------------------------------------------------|--------------|
+| mh-1.0.1 | MessageHandler 3.4.3, Amazon Corretto JRE 8u382, Alpine 3.18 | 2023-07-27   |
 | mh-1.0.0 | MessageHandler 3.4.2, Amazon Corretto JRE 8u372, Alpine 3.17 | 2023-06-01   |
 | dev      | Development version. Do not use for production               | 2023-06-01   |
 
