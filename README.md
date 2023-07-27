@@ -7,15 +7,21 @@ regarding Open eGov MessageHandler consult the
 This Docker image should be used in conjunction with the
 [offical sedex Docker image](https://hub.docker.com/r/sedexch/sedex-client).
 
+## Build the image for development
+
+To build the Docker imagage locally for development
+
+docker build . --file Dockerfile --tag gluech/msghandler:dev
+
 ## Usage
 
 The docker images are available on 
-[Glue Software Engineering AG - MessageHandler Images](https://hub.docker.com/r/gluech/msghandler)
+[Glue Software Engineering AG - MessageHandler Images](https://hub.docker.com/repository/docker/gluech/msghandler/)
 
 To use the MessageHandler images from Docker hub, run
 
 ```
-docker pull gluech/msghandler:mh-1.0.0
+docker pull gluech/mh:1.0.1
 ```
 
 ## How to test drive MH?
