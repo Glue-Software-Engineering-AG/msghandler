@@ -21,7 +21,7 @@ The docker images are available on
 To use the MessageHandler images from Docker hub, run
 
 ```
-docker pull gluech/mh:1.0.1
+docker pull gluech/mh:1.0.2
 ```
 
 ## How to test drive MH?
@@ -34,7 +34,7 @@ cd .../msghandler-docker
 docker compose up -d
 ```
 
-The MH container will start up. All files and directories it need are located underneath the directory `host-folders`.
+The MH container will start up. All files and directories it needs are located underneath the directory `host-folders`.
 
 | Directory | Description |
 | --------- | ----------- |
@@ -53,6 +53,7 @@ deployments.
 
 | Tag      | Description                                                  | Release date |
 |----------|--------------------------------------------------------------|--------------|
+| mh-1.0.2 | MessageHandler 3.4.4, Amazon Corretto JRE 8u402, Alpine 3.19 | 2024-04-12   |
 | mh-1.0.1 | MessageHandler 3.4.3, Amazon Corretto JRE 8u382, Alpine 3.18 | 2023-07-27   |
 | mh-1.0.0 | MessageHandler 3.4.2, Amazon Corretto JRE 8u372, Alpine 3.17 | 2023-06-01   |
 | dev      | Development version. Do not use for production               | 2023-06-01   |
@@ -66,14 +67,13 @@ about the different versions and tags of the Docker image, see above.
 
 ## Known Vulnerabilities
 
-As of Mai 2023 the vulnerability check of Docker Hub reports vulnerabilities in the following Java libraries used by 
-MessageHandler 3.4.2:
+As of April 2024 the vulnerability check of Docker Hub reports vulnerabilities with a CVSS Score > 7 in the following 
+Java libraries used by MessageHandler 3.4.4:
 
 * org.apache.santuario/xmlsec 2.0.7
 * commons-beanutils/commons-beanutils 1.8.3
-* commons-io/commons-io 2.6
-* com.google.guava/guava 23.6-android
 
 Due to dependencies in the MessageHandler code, we cannot update the vulnerable libraries to newer versions.
-However, we have analysed the situation in detail and have concluded that the reported vulnerabilities in MessageHandler
-will not affect the secure operation of MessageHandler in any way.
+However, we have analysed the situation in detail and have come to the conclusion that the reported vulnerabilities in 
+MessageHandler will not affect the secure operation of MessageHandler in any way, as under normal conditions
+MessageHandler is not exposed to the Internet. 

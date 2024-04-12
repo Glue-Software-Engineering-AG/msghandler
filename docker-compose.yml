@@ -5,7 +5,7 @@ services:
 # `host-folders/conf/config.xml` and the related directory structure under `host-folders`
 
   messagehandler:
-    image: gluech/msghandler:mh-1.0.1
+    image: gluech/msghandler:mh-1.0.2
     container_name: messagehandler
     #restart: unless-stopped
     user: 10003:20002
@@ -20,6 +20,8 @@ services:
       - ./host-folders/conf/signing/demo-certificate.p12:/opt/msghandler/current/conf/signing/demo-certificate.p12:ro
       # Mount the log directory
       - ./host-folders/log:/opt/msghandler/current/log
+      # Mount the working directory. Note: subdirectory will be created if they do not exist on the docker host
+      - ./host-folders/working:/working
       # Mount the sedex interface directory
       - ./host-folders/sedex/interface:/app/sedex
       # Mount the directories used for the native application. The directories are referenced in

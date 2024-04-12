@@ -1,6 +1,6 @@
-FROM amazoncorretto:8u382-alpine3.18-jre
+FROM amazoncorretto:8u402-alpine3.19-jre
 
-MAINTAINER Glue Software Engineering AG <support@fenceit.ch>
+LABEL org.opencontainers.image.authors="Glue Software Engineering AG <support@fenceit.ch>"
 
 # Installation dir of msghandler
 ARG MSGHANDLER_INSTALL_DIR="/opt/msghandler"
@@ -20,8 +20,8 @@ RUN \
     gcompat \
     tzdata && \
     # Create installation directory \
-    mkdir -p $MSGHANDLER_INSTALL_DIR && \
-    cd  $MSGHANDLER_INSTALL_DIR && \
+    mkdir -p "$MSGHANDLER_INSTALL_DIR" && \
+    cd  "$MSGHANDLER_INSTALL_DIR" && \
     # extract distro \
     tar -zxvf open-egov-msghandler-*-linux-x86-64.tar.gz && \
     # clean up \
@@ -31,12 +31,12 @@ RUN \
     # remove example config file. We will use the config file mounted from host \
     rm /opt/msghandler/current/conf/config.xml && \
     # Adapt permissions such, that MH can be started using any user \
-    cd $MSGHANDLER_INSTALL_DIR/current && \
+    cd "$MSGHANDLER_INSTALL_DIR"/current && \
     # all files: (644) rw r r \
     find . -type f -exec chmod 0644 {} \; && \
     # all dirs: (755) rwx rx rx \
     find . -type d -exec chmod 0755 {} \; && \
-    # Create all neded dirs under /app/msghandler (see Glue-Software-Engineering-AG/msghandler-docker#5) \
+    # Create all needed dirs under /app/msghandler (see Glue-Software-Engineering-AG/msghandler-docker#5) \
     mkdir -p \
       /working/tmp/receiving \
       /working/tmp/preparing \
