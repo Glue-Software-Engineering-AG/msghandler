@@ -1,4 +1,4 @@
-FROM amazoncorretto:8u402-alpine3.19-jre
+FROM amazoncorretto:8u432-alpine3.20-jre
 
 LABEL org.opencontainers.image.authors="Glue Software Engineering AG <support@fenceit.ch>"
 
@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.authors="Glue Software Engineering AG <support@fe
 ARG MSGHANDLER_INSTALL_DIR="/opt/msghandler"
 
 # set correct Timezone
-ENV TZ Europe/Zurich
+ENV TZ=Europe/Zurich
 
 # Expose default msghandler webservice port
 EXPOSE 18080

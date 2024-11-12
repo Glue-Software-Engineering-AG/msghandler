@@ -21,7 +21,7 @@ The docker images are available on
 To use the MessageHandler images from Docker hub, run
 
 ```
-docker pull gluech/mh:1.0.2
+docker pull gluech/mh:1.0.3
 ```
 
 ## How to test drive MH?
@@ -53,10 +53,11 @@ deployments.
 
 | Tag      | Description                                                  | Release date |
 |----------|--------------------------------------------------------------|--------------|
+| mh-1.0.3 | MessageHandler 3.4.5, Amazon Corretto JRE 8u432, Alpine 3.20 | 2024-11-12   |
 | mh-1.0.2 | MessageHandler 3.4.4, Amazon Corretto JRE 8u402, Alpine 3.19 | 2024-04-12   |
 | mh-1.0.1 | MessageHandler 3.4.3, Amazon Corretto JRE 8u382, Alpine 3.18 | 2023-07-27   |
 | mh-1.0.0 | MessageHandler 3.4.2, Amazon Corretto JRE 8u372, Alpine 3.17 | 2023-06-01   |
-| dev      | Development version. Do not use for production               | 2023-06-01   |
+| dev      | Development version. Do not use for production               |              |
 
 ## Why does the tag latest not exist?
 
@@ -68,10 +69,13 @@ about the different versions and tags of the Docker image, see above.
 ## Known Vulnerabilities
 
 As of April 2024 the vulnerability check of Docker Hub reports vulnerabilities with a CVSS Score > 7 in the following 
-Java libraries used by MessageHandler 3.4.4:
+Java libraries used by MessageHandler 3.4.5:
 
-* org.apache.santuario/xmlsec 2.0.7
 * commons-beanutils/commons-beanutils 1.8.3
+* commons-i0/commons-io 2.6
+* org.apache.santuario/xmlsec 2.0.7
+* org.bouncycastle/bcprov-jdk150n 1.59
+* org.verapdf/core 1.10.2
 
 Due to dependencies in the MessageHandler code, we cannot update the vulnerable libraries to newer versions.
 However, we have analysed the situation in detail and have come to the conclusion that the reported vulnerabilities in 
